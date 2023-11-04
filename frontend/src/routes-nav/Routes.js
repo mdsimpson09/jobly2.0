@@ -11,8 +11,6 @@ import SignupForm from "../auth/SignupForm";
 import currentUser from "./PrivateRoute";
 
 // Placeholder components
-// const NotFound = () => <div>Page Not Found</div>;
-
 const home = () => {
   return <h2>Landing (Public: anyone can access this page)</h2>;
 };
@@ -25,8 +23,7 @@ const Jobs = () => {
   return <h2>Dashboard (Protected: authenticated user required)</h2>;
 };
 
-
-//navigation Component
+// Navigation Component
 const Navigation = () => {
   return (
     <nav>
@@ -41,26 +38,55 @@ const Navigation = () => {
 };
 
 // Site-wide routes
-const Routea = ({ login, signup }) => {
-const ProtectedRoute = ({ user, children }) => {
-  if (!user) {
-    return <Navigate to="/" replace />;
-  }
+const Routea = () => {
+  const ProtectedRoute = ({ user, children }) => {
+    if (!user) {
+      return <Navigate to="/" replace />;
+    }
 
-  return children;
-};
+    return children;
+  };
+
   return (
     <div className="pt-5">
       <Navigation />
       <Routes>
-      <Route index element={<Homepage />} />
-        <Route path="home" element={<Homepage />} />
-        <Route path="/companies" element={<ProtectedRoute Currentuser={currentUser}> <CompanyList /> </ProtectedRoute> } />
-        <Route path="/jobs" element={<ProtectedRoute currentUser={currentUser}> <JobList /> </ProtectedRoute>} />
-        <Route path="/companies/:handle" element={<ProtectedRoute currentUser={currentUser}> <CompanyDetail /> </ProtectedRoute>} />
+        <Route index element={<Homepage />} />
+        <Route path="/home" element={<Homepage />} />
+        <Route
+          path="/companies"
+          element={
+            <ProtectedRoute user={currentUser}>
+              <CompanyList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/jobs"
+          element={
+            <ProtectedRoute user={currentUser}>
+              <JobList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/companies/:handle"
+          element={
+            <ProtectedRoute user={currentUser}>
+              <CompanyDetail />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/signup" element={<SignupForm />} />
-        <Route path="/profile" element={<ProtectedRoute currentUser={currentUser}> <ProfileForm /> </ProtectedRoute>} />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute user={currentUser}>
+              <ProfileForm />
+            </ProtectedRoute>
+          }
+        />
         <Route path="*" element={<p> Page not found</p>} />
       </Routes>
     </div>
@@ -68,6 +94,78 @@ const ProtectedRoute = ({ user, children }) => {
 };
 
 export default Routea;
+
+
+// import React from "react";
+// import { Routes, Route, Navigate } from "react-router-dom";
+// import { Link } from "react-router-dom";
+// import Homepage from "../homepage/Homepage";
+// import CompanyList from "../companies/CompanyList";
+// import JobList from "../jobs/JobList";
+// import CompanyDetail from "../companies/CompanyDetail";
+// import LoginForm from "../auth/LoginForm";
+// import ProfileForm from "../profiles/ProfileForm";
+// import SignupForm from "../auth/SignupForm";
+// import currentUser from "./PrivateRoute";
+
+// // Placeholder components
+// // const NotFound = () => <div>Page Not Found</div>;
+
+// const home = () => {
+//   return <h2>Landing (Public: anyone can access this page)</h2>;
+// };
+
+// const Companies = () => {
+//   return <h2>Home (Protected: authenticated user required)</h2>;
+// };
+
+// const Jobs = () => {
+//   return <h2>Dashboard (Protected: authenticated user required)</h2>;
+// };
+
+
+// //navigation Component
+// const Navigation = () => {
+//   return (
+//     <nav>
+//       <Link to="/">Home</Link>
+//       <Link to="/companies">Companies</Link>
+//       <Link to="/jobs">Jobs</Link>
+//       <Link to="/login">Login</Link>
+//       <Link to="/signup">Signup</Link>
+//       <Link to="/profile">Profile</Link>
+//     </nav>
+//   );
+// };
+
+// // Site-wide routes
+// const Routea = ({ login, signup }) => {
+// const ProtectedRoute = ({ user, children }) => {
+//   if (!user) {
+//     return <Navigate to="/" replace />;
+//   }
+
+//   return children;
+// };
+//   return (
+//     <div className="pt-5">
+//       <Navigation />
+//       <Routes>
+//       <Route index element={<Homepage />} />
+//         <Route path="home" element={<Homepage />} />
+//         <Route path="/companies" element={<ProtectedRoute Currentuser={currentUser}> <CompanyList /> </ProtectedRoute> } />
+//         <Route path="/jobs" element={<ProtectedRoute currentUser={currentUser}> <JobList /> </ProtectedRoute>} />
+//         <Route path="/companies/:handle" element={<ProtectedRoute currentUser={currentUser}> <CompanyDetail /> </ProtectedRoute>} />
+//         <Route path="/login" element={<LoginForm />} />
+//         <Route path="/signup" element={<SignupForm />} />
+//         <Route path="/profile" element={<ProtectedRoute currentUser={currentUser}> <ProfileForm /> </ProtectedRoute>} />
+//         <Route path="*" element={<p> Page not found</p>} />
+//       </Routes>
+//     </div>
+//   );
+// };
+
+// export default Routea;
 
 
 

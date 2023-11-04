@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import SignupForm from "./auth/SignupForm";
 import useLocalStorage from "./hooks/useLocalStorage";
 import Navigation from "./routes-nav/Navigation";
-import Routes from "./routes-nav/Routes";
+import Routea from "./routes-nav/Routes";
 import LoadingSpinner from "./common/LoadingSpinner";
 import JoblyApi from "./api/api";
 import UserContext from "./auth/UserContext";
@@ -13,18 +14,20 @@ export const TOKEN_STORAGE_ID = "jobly-token";
 
 function App() {
   const [infoLoaded, setInfoLoaded] = useState(false);
-  const [applicationIds, setApplicationIds] = useState(new Set([]));
   const [currentUser, setCurrentUser] = useState(null);
-  const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
+  const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID, null);
+  const [applicationIds, setApplicationIds] = useState(new Set());
 
   console.debug(
     "App",
-    "infoLoaded=", infoLoaded,
-    "currentUser=", currentUser,
-    "token=", token,
+    "infoLoaded=",
+    infoLoaded,
+    "currentUser=",
+    currentUser,
+    "token=",
+    token
   );
 
-  
   useEffect(() => {
     console.debug("App useEffect loadUserInfo", "token=", token);
 
@@ -86,7 +89,6 @@ function App() {
   }
 
   if (!infoLoaded) return <LoadingSpinner />;
-
   return (
     <UserContext.Provider
       value={{ currentUser, setCurrentUser, hasAppliedToJob, applyToJob }}
@@ -94,7 +96,7 @@ function App() {
       <BrowserRouter>
         <div className="App">
           <Navigation logout={logout} />
-          <Routes login={login} signup={signup} />
+          <Routea />
         </div>
       </BrowserRouter>
     </UserContext.Provider>
@@ -102,6 +104,24 @@ function App() {
 }
 
 export default App;
+//   return (
+//     <UserContext.Provider
+//       value={{ currentUser, setCurrentUser, hasAppliedToJob, applyToJob }}
+//     >
+//       <BrowserRouter>
+//         <div className="App">
+//           <Navigation logout={logout} />
+//           <Routes>
+//             <Route path="/signup" element={<SignupForm signup={signup} />} />
+//             {/* Add other routes here */}
+//           </Routes>
+//         </div>
+//       </BrowserRouter>
+//     </UserContext.Provider>
+//   );
+// }
+
+// export default App;
 
 // import React, { useState, useEffect } from "react";
 // import { RouterProvider, BrowserRouter } from "react-router-dom";
