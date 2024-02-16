@@ -1,6 +1,58 @@
 .Homepage {
-  /* put around the vertical center of page */
+  /* Existing styles */
   height: calc(100vh - 150px);
   display: flex;
   align-items: center;
+  justify-content: center; /* Center horizontally */
+  text-align: center; /* Ensure text is centered within the container */
+  background-color: #f8f9fa; /* A light background to keep it fresh and modern */
+  color: #333; /* Darker text for better readability */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern, readable font */
+}
+
+/* Add some padding and margin to enhance spacing */
+.Homepage .container {
+  padding: 20px;
+}
+
+/* Modernize buttons with smoother corners and more spacing */
+.btn {
+  border-radius: 20px; /* Rounded corners for buttons */
+  padding: 10px 20px; /* Larger padding for a bigger touch area */
+  margin: 0 10px 20px 10px; /* Spacing around buttons */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+  transition: transform 0.2s; /* Smooth transition for interaction */
+}
+
+.btn:hover {
+  transform: scale(1.05); /* Slightly enlarge buttons on hover */
+}
+
+/* Enhance navbar links */
+.nav-link {
+  margin-right: 15px; /* Add space between navbar links */
+  color: #007bff; /* Bootstrap primary color for consistency */
+  transition: color 0.2s; /* Smooth color transition on hover */
+}
+
+.nav-link:hover {
+  color: #0056b3; /* Darker shade on hover for interaction feedback */
+}
+
+/* Typography enhancements */
+h1, h2, p {
+  margin-bottom: 20px; /* Add more space below headings and paragraphs */
+}
+
+h1 {
+  font-size: 2.5rem; /* Larger font size for main heading */
+}
+
+h2 {
+  font-size: 2rem; /* Slightly smaller font size for secondary headings */
+}
+
+p.lead {
+  font-size: 1.25rem; /* Larger and more readable paragraph text */
+  color: #6c757d; /* Muted text color for less important text */
 }
